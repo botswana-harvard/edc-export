@@ -59,7 +59,7 @@ class ExportTransaction(ExportTrackingFieldsMixin, SyncModelMixin, BaseUuidModel
 
     objects = ExportTransactionManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return '{} {} {}'.format(self.object_name, self.status, self.export_uuid)
 
     def natural_key(self):

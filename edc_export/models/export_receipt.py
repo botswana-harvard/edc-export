@@ -36,7 +36,7 @@ class ExportReceipt(SyncModelMixin, BaseUuidModel):
 
     objects = ExportReceiptManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return '{} {}'.format(self.object_name, self.export_uuid)
 
     def natural_key(self):

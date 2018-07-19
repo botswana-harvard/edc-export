@@ -63,7 +63,7 @@ class BaseExportModel(object):
         except AttributeError:
             export_datetime = timezone.now().strftime('%Y%m%d%H%M%S')
         self.export_filename = '{0}_{1}.csv'.format(
-            unicode(self.model._meta).replace('.', '_'),
+            str(self.model._meta).replace('.', '_'),
             export_datetime)
         self.export_history = None
 
@@ -122,13 +122,13 @@ class BaseExportModel(object):
             if field_name in self.extra_fields:
                 value = self.get_row_value_from_query_string(obj, field_name)
         value = value if value is not None else ''
-        return unicode(value).encode("utf-8", "replace")
+        return str(value).encode("utf-8", "replace")
 
     def get_row_value_from_callable(self, obj, field_name):
         func = self.extra_fields.get(field_name)
         value = func(obj)
         value = value if value is not None else ''
-        return unicode(value).encode("utf-8", "replace")
+        return str(value).encode("utf-8", "replace")
 
     def get_row_value_from_query_string(self, obj, field_name):
         """Gets the row value by following the query string to related instances."""
@@ -139,7 +139,7 @@ class BaseExportModel(object):
             # recurse to last relation to get value
             value, _ = self.recurse_on_getattr(obj, query_list)
         value = value if value is not None else ''
-        return unicode(value).encode("utf-8", "replace")
+        return str(value).encode("utf-8", "replace")
 
     def recurse_on_getattr(self, obj, query_list):
         """ Recurse on result of getattr() with a given query string as a list.
