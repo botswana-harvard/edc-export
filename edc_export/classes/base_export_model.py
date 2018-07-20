@@ -90,7 +90,7 @@ class BaseExportModel(object):
                 writer.writerow(self.row)
                 export_file_contents.append(self.row)
                 self.update_export_transaction(self.row_instance)
-                exported_pk_list.append(self.row_instance.pk)
+                exported_pk_list.append(str(self.row_instance.pk))
                 export_uuid_list.append(self.row_instance.export_uuid)
         if self.track_history:
             self.update_export_history(exported_pk_list, export_uuid_list, export_file_contents)
@@ -104,7 +104,7 @@ class BaseExportModel(object):
         m2m_headers = []
         for field_name in self.field_names:
             value = self.get_row_value_from_attr(self.row_instance, field_name)
-            row.append(self.strip_value(value))
+            row.append(value.decode().strip())
         if self.show_all_fields:
             # add m2m fields if show_all_fields -- they are not listed in field_names generated from the model
             m2m_headers, m2m_row_values = self.get_row_values_from_m2m(self.row_instance)
