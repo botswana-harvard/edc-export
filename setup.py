@@ -11,9 +11,9 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='edc-export',
-    version='0.2.0dev0',
-    author=u'Erik van Widenfelt',
-    author_email='ew2789@gmail.com',
+    version='0.1.1',
+    author=u'BHP Software Engineering & Data Management Center',
+    author_email='se-dmc@bhp.org.bw',
     packages=find_packages(),
     include_package_data=True,
     url='https://github.com/botswana-harvard/edc-export',
