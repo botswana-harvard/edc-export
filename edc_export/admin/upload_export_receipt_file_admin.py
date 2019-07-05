@@ -1,8 +1,10 @@
 from django.contrib import admin
 
+from ..admin_site import edc_export_admin
 from ..models import UploadExportReceiptFile
 
 
+@admin.register(UploadExportReceiptFile, site=edc_export_admin)
 class UploadExportReceiptFileAdmin(admin.ModelAdmin):
 
     date_hierarchy = 'created'
@@ -13,5 +15,3 @@ class UploadExportReceiptFileAdmin(admin.ModelAdmin):
         'hostname_created')
 
     list_filter = ('created', 'hostname_created')
-
-admin.site.register(UploadExportReceiptFile, UploadExportReceiptFileAdmin)

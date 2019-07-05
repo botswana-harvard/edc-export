@@ -1,8 +1,6 @@
 from django.db import models
-
-from edc_base.model.fields import UUIDField
-from edc_base.model.models import BaseUuidModel
-from edc_sync.models import SyncModelMixin
+from edc_base.model_mixins import BaseUuidModel
+from edc_base.model_managers import HistoricalRecords
 
 
 class ExportReceiptManager(models.Manager):
@@ -11,16 +9,13 @@ class ExportReceiptManager(models.Manager):
         return self.get(export_uuid=export_uuid)
 
 
-class ExportReceipt(SyncModelMixin, BaseUuidModel):
+class ExportReceipt(BaseUuidModel):
 
-    export_uuid = UUIDField(
+    export_uuid = models.UUIDField(
         editable=False,
         help_text="system field for export tracking.")
 
-    app_label = models.CharField(
-        max_length=64)
-
-    object_name = models.CharField(
+    model = models.CharField(
         max_length=64)
 
     tx_pk = models.CharField(
@@ -36,16 +31,13 @@ class ExportReceipt(SyncModelMixin, BaseUuidModel):
 
     objects = ExportReceiptManager()
 
-    def __unicode__(self):
-        return '{} {}'.format(self.object_name, self.export_uuid)
+    history = HistoricalRecords()
+
+    def __str__(self):
+        return f'{self.model_name}.{self.export_uuid}'
 
     def natural_key(self):
         return (self.export_uuid, )
 
-    def dashboard(self):
-        # TODO: get this dashboard url
-        return 'dashboard?'
-
     class Meta:
-        app_label = 'edc_export'
         ordering = ('-timestamp', )

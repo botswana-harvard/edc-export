@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Django==1.6
 M2Crypto==0.22.3
 django-tastypie
@@ -37,3 +38,10 @@ git+https://github.com/botswana-harvard/edc-visit-schedule@master#egg=edc-visit-
 git+https://github.com/botswana-harvard/lab-requisition@master#egg=lab-requisition
 git+https://github.com/botswana-harvard/lis@master#egg=lis
 git+https://github.com/erikvw/django-revision@master#egg=django-revision
+=======
+Django
+django-crypto-fields
+django-revision
+django-simple-history
+edc-base
+>>>>>>> release/0.1.2
